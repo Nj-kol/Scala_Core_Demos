@@ -1,5 +1,27 @@
 # Scala Generics
 
+## Variance in Scala
+
+* Variance ***defines the subtyping relationship among type constructors***, using the subtyping relationship among the types that bind their type variables. 
+* For a type constructor F[_], if B is a subtype of A, variance describes the relationship between the type F[B] and the type F[A]
+  - F[_] is *covariant* if B is a subtype of type A and F[B] is a subtype of type F[A]. 
+  - F[_] is *contravariant* if B is a subtype of type A and F[A] is a subtype of type F[B]
+  - F[_] is *invariant* if any subtype relationship between types A and B is not preserved in any order between types F[A] and F[B].
+* Scala lets you declare the variance of a type by annotating the type parameter
+
+	1. class C[+A] { ... } : C is *Covariant*
+	2. class C[-A] { ... } : C is *Contravariant*
+	3. class C[A]  { ... } : C is *Invariant*
+	
+* Invariance is the only type of relationship available in many programming languages that allows the use of type constructors, similar to Java and C++.
+
+* So functions are *contravariant* in their argument type(s) and *covariant* in their result type
+
+### Here’s a rule of thumb
+
+* When your generic type ***“contains“*** or ***“produces“*** elements of type T, it should be **covariant**. Examples of covariant concepts: a cage (holds animals), a garage (holds cars), a factory (creates objects), a list (and any other collection).
+* When your generic type ***“acts on“”*** or ***“consumes”*** elements of type T, it should be **contravariant**. Examples of contravariant concepts: a vet (heals animals), a mechanic (fixes cars), a garbage pit (consumes objects), a function (it acts on/it’s applied on arguments).
+
 ## Type Bounds
 
 * Type Bounds are restrictions on Type Parameters or Type Variables. By using Type Bounds, we can define the limits of a Type Variable
@@ -60,19 +82,3 @@
  
   would restrict S  any type on the interval between  NonEmpty and InSet
 
-## Variance in Scala
-
-* Variance ***defines the subtyping relationship among type constructors***, using the subtyping relationship among the types that bind their type variables. 
-* For a type constructor F[_], if B is a subtype of A, variance describes the relationship between the type F[B] and the type F[A]
-  - F[_] is *covariant* if B is a subtype of type A and F[B] is a subtype of type F[A]. 
-  - F[_] is *contravariant* if B is a subtype of type A and F[A] is a subtype of type F[B]
-  - F[_] is *invariant* if any subtype relationship between types A and B is not preserved in any order between types F[A] and F[B].
-* Scala lets you declare the variance of a type by annotating the type parameter
-
-	1. class C[+A] { ... } : C is *Covariant*
-	2. class C[-A] { ... } : C is *Contravariant*
-	3. class C[A]  { ... } : C is *Invariant*
-	
-* Invariance is the only type of relationship available in many programming languages that allows the use of type constructors, similar to Java and C++.
-
-* So functions are *contravariant* in their argument type(s) and *covariant* in their result type
