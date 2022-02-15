@@ -19,7 +19,8 @@ metastore_db
 .settings
 .recommenders/caches
 .metadata
-
+.metals/
+.vscode/
 **/.DS_Store
 /.recommenders/
 
